@@ -35,12 +35,25 @@
 #             max_sum = max(max_sum, pre)
 #         return max_sum
 #*****************************************贪心*******************************************************************
-#只要前面pre的和小于零就丢掉
+# #只要前面pre的和小于零就丢掉
+# class Solution:
+#     def maxSubArray(self, nums: list[int]) -> int:
+#         pre = 0
+#         max_sum = nums[0]
+#         for i in range(len(nums)):
+#                 pre = nums[i] if (pre<0) else pre+nums[i]
+#                 max_sum = max(max_sum, pre)
+#         return max_sum
+
+#*****************************************动态规划优化*******************************************************************
 class Solution:
     def maxSubArray(self, nums: list[int]) -> int:
-        pre = 0
+        dp =nums[0]
         max_sum = nums[0]
-        for i in range(len(nums)):
-                pre = nums[i] if (pre<0) else pre+nums[i]
-                max_sum = max(max_sum, pre)
+        for i in range(len(nums)-1):
+            if dp<=0:
+                dp=nums[i+1]
+            else:
+                dp+=nums[i+1]
+            max_sum = max(dp, max_sum)
         return max_sum
