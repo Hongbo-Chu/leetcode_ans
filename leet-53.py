@@ -26,12 +26,21 @@
 
 
 #*****************************************动态规划*******************************************************************
+# class Solution:
+#     def maxSubArray(self, nums: list[int]) -> int:
+#         pre =0
+#         max_sum = nums[0]
+#         for i in range(len(nums)):
+#             pre = max(nums[i], pre+nums[i])#用来存局部最大值
+#             max_sum = max(max_sum, pre)
+#         return max_sum
+#*****************************************贪心*******************************************************************
+#只要前面pre的和小于零就丢掉
 class Solution:
     def maxSubArray(self, nums: list[int]) -> int:
-        pre =0
+        pre = 0
         max_sum = nums[0]
         for i in range(len(nums)):
-            pre = max(nums[i], pre+nums[i])
-            max_sum = max(max_sum, pre)
+                pre = nums[i] if (pre<0) else pre+nums[i]
+                max_sum = max(max_sum, pre)
         return max_sum
-
